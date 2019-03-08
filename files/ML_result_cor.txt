@@ -1,0 +1,81 @@
+MODEL: GaussianNB(priors=None)
+RESULT
+             precision    recall  f1-score   support
+
+CATEGORICAL       0.32      0.98      0.48       114
+ CONTINUOUS       1.00      0.83      0.90      1366
+
+avg / total       0.95      0.84      0.87      1480
+Accuracy: 0.8385135135135136
+CONFUSION MATRIX
+[[ 112    2]
+ [ 237 1129]]
+
+MODEL: KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=30, p=2,
+           weights='uniform')
+RESULT
+             precision    recall  f1-score   support
+
+CATEGORICAL       0.74      0.39      0.51       114
+ CONTINUOUS       0.95      0.99      0.97      1366
+
+avg / total       0.93      0.94      0.93      1480
+Accuracy: 0.9425675675675675
+CONFUSION MATRIX
+[[  45   69]
+ [  16 1350]]
+
+MODEL: SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+RESULT
+             precision    recall  f1-score   support
+
+CATEGORICAL       0.79      0.59      0.67       114
+ CONTINUOUS       0.97      0.99      0.98      1366
+
+avg / total       0.95      0.96      0.95      1480
+Accuracy: 0.956081081081081
+CONFUSION MATRIX
+[[  67   47]
+ [  18 1348]]
+
+MODEL: DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=20,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+RESULT
+             precision    recall  f1-score   support
+
+CATEGORICAL       0.84      0.84      0.84       114
+ CONTINUOUS       0.99      0.99      0.99      1366
+
+avg / total       0.98      0.98      0.98      1480
+Accuracy: 0.9756756756756757
+CONFUSION MATRIX
+[[  96   18]
+ [  18 1348]]
+
+MODEL: RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=50, max_features=50, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)
+RESULT
+             precision    recall  f1-score   support
+
+CATEGORICAL       0.84      0.84      0.84       114
+ CONTINUOUS       0.99      0.99      0.99      1366
+
+avg / total       0.98      0.98      0.98      1480
+Accuracy: 0.9756756756756757
+CONFUSION MATRIX
+[[  96   18]
+ [  18 1348]]
+

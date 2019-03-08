@@ -1,0 +1,85 @@
+
+The deck could include below contents, and feel free to add any other interesting topics.
+
+•	Describe the problem, missing tag and error tag in current VC(with some examples), and the impact to modeling(RMR) 
+•	Build a model to predict variable type 
+o	Key word in variable name 
+o	Return type 
+o	Sample data 
+o	Other technical highlight
+•	Model performance 
+o	False positive cases 
+•	Future work 
+o	Improve model accuracy 
+o	Expand to multiple tagging(supplement )
+
+问题描述：众所周知，我们在建模的时候，会用到非常非常多的变量，成千上万。但是在这些变量产生的时候，我们也许并不确切的知道他的实际意义，因为变量的命名可能有很多种方式。举例：比如当我们看到
+这样的变量的时候, 我们很难知道他的意思。但是这个变量可能对建模而言，会很有作用。所以我们仍需要使用它。使用它避不开的一个问题就是得知道这个变量的类型是什么。是categorical？还是continuous。
+这两种type将决定我们对这些变量的不同的处理方法。这个问题的解决以前主要是 依靠manual work，但是如此数量级的变量通过人力来处理 未免对那个处理的小伙伴太过残忍 而且不能保证的是 人力标注的准确率
+会很高。所以我们通过建立一个模型来解决这样的问题。
+
+我们首先来看一下我们要处理的数据：（example）
+
+对这些variable 我们拥有的数据 一个是这些数据的相关信息 诸如：example 
+另一个是 这些数据本身的instance ：                                                                                                   
+
+我们最终是想对每个variable 提取出具有比较好的分类效果的feature 然后将这些feature放入ML model 中训练。
+由于这一份文件很多信息我们是很容易把他们变成feature 处理的 所以我们首先对数据文件进行分析 从这些数据中先抽取有用的一些特征。
+
+我们主要获得的feature 是return type和 distinct number。前一个是很直观的 后一个是因为我们发现 最终categorical 一般是distinct number比较小的，而continuous 一般是distinct number比较大的。所以也入
+选作为一个特征。
+
+以上是我们从数据本身得到的特征 而从描述文件中 我们可以利用的信息是variable name，还有。。。
+其中对variable name的处理是值得一说的，以因为这些name种隐含着很多对变量本身的描述 比如：sum、IP之类 而出现sum这种基本上就是continuous类型 出现IP大概率就是categorical类型。
+我们对name处理的方法是分词 分词后我们除去纯数字的词 单字母的词 对剩下的词按词频由高到低排序 然后我们取前N维作为特征。举例：
+
+现在我们已经得到了数据的feature 我们将数据放入模型中训练 
+不含测试集结果：
+
+
+大家可能会觉得 不含测试集会不会出现过拟合 会不会实际效果并不怎么好呢？划分数据集 测试集结果：
+
+
+模型达到了不错的精度 对于剩下的  我们再去manual fix 的工作量 会小很多 
+
+future work ：
+
+我们未来的工作主要有两个方向：
+第一个是挖掘更多具有比较好的分类效果的feature 
+第二个是针对特定的错误类型且模型很难检测到的 我们制定一些rule。
+
+
+Problem Description: As we all know, we use a very, very large number of variables in our modeling process. But when these variables are generated, we may not know exactly what his actual meaning is because there are many ways to name variables. Example: For example when we see
+With such variables, it is difficult for us to know what he means. However, this variable may be useful for modeling. So we still need to use it. One problem that you can't avoid using it is to know what the type of this variable is. Is categorical? Still continuous.
+These two types will determine our different treatment of these variables. The solution to this problem was mainly to rely on manual work before, but such an order of magnitude of variables handled by manpower would be too cruel to the processing partner and could not guarantee the accuracy of manual tagging.
+It will be high. So we solve this problem by creating a model.
+
+Let's first look at the data we want to process: (example)
+
+One of the data we have for these variables is information about these data.
+The other is an instance of the data itself:
+
+We finally want to extract features that have better classification effects for each variable and then put these features into the ML model to train.
+Since we have a lot of information in this document, we can easily turn them into features. So we first analyze the data files and extract some useful features from these data.
+
+The features we mainly get are the return type and distinct number. The former is very intuitive. The latter one is because we found that the final categorical is generally a relatively small distinct number, while continuous is generally a large distinct number. So also enter
+Selected as a feature.
+
+The above is the characteristics we get from the data itself. The information we can use from the description file is the variable name. . .
+The processing of variable name is worth mentioning, because these name types imply many descriptions of the variables themselves such as: sum, IP and the like and sum occurs. This is basically a continuous type. The probability of occurrence of an IP is a categorical type. .
+Our approach to name processing is to remove words that are purely numeric after single word segmentation. Single-letter Words Sort the remaining words by word frequency from high to low. Then we take the first N dimension as a feature. For example:
+
+Now that we have got the feature of the data we put the data into the model training
+No test set results:
+
+
+You may think that without the test set, there will not be overfitting. Will not the actual effect be so good? Divide the data set test set results:
+
+
+The model has achieved a good precision. For the rest of us, the workload of the manual fix will be much smaller.
+
+Future work:
+
+Our future work has two main directions:
+The first is to mine more features with better classification effects
+The second is for certain types of errors and the model is difficult to detect. We make some rules.
